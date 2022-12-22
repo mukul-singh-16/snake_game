@@ -2,7 +2,7 @@
 #include<conio.h>
 #include<windows.h>
 using namespace std;
-bool gameOver;
+bool GO;
 const int width = 20;
 const int height = 20;
 int x,y, fruitX,fruitY, score;
@@ -11,7 +11,7 @@ int nTail;
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 void Setup(){
-    gameOver = false;
+    GO = false;
     dir = STOP;
     x = width/2;
     y = height/2;
@@ -76,7 +76,7 @@ void Input(){
             dir = RIGHT; 
             break;
         case 'x':
-            gameOver = true;
+            GO = true;
             break;
         }
     }
@@ -119,7 +119,7 @@ void Logic(){
     if(y >= height) y=0; else if(y<0) y = height -1;
     for(int i =0;i<nTail;i++){
         if(tailX[i]==x && tailY[i]==y){
-            gameOver = true;
+            GO = true;
         }
     }
     if(x == fruitX && y == fruitY){
@@ -131,7 +131,7 @@ void Logic(){
 }
 int main(){
     Setup();
-    while(!gameOver){
+    while(!GO){
         Draw();
         Input();
         Logic();
